@@ -18,7 +18,6 @@ public class FlorDTO {
     public FlorDTO() {
     }
 
-    // Getters y Setters
 
     public int getPk_FlorID() {
         return pk_FlorID;

@@ -49,7 +49,8 @@ public class FlorServiceImpl implements FlorService {
     @Transactional(readOnly = true)
     public List<FlorDTO> findAll() {
         List<Flor> flors = florRepository.findAll();
-        return flors.stream().map(flor -> modelMapper.map(flor, FlorDTO.class)).collect(Collectors.toList());
+        List<FlorDTO> dtos = flors.stream().map(flor -> modelMapper.map(flor, FlorDTO.class)).collect(Collectors.toList());
+        return dtos;
     }
 
 }

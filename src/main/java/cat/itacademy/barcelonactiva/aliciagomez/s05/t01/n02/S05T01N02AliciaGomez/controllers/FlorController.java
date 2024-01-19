@@ -37,7 +37,7 @@ public class FlorController {
     public ResponseEntity<?> read(@PathVariable(value = "id") int id){
         Optional<FlorDTO> flor = florService.findById(id);
 
-        if(!flor.isPresent()) {
+        if(flor.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
@@ -55,7 +55,7 @@ public class FlorController {
     public ResponseEntity<?> update(@RequestBody FlorDTO florDetails, @PathVariable(value = "id") int id) {
         Optional<FlorDTO> flor = florService.findById(id);
 
-        if(!flor.isPresent()) {
+        if(flor.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
@@ -70,7 +70,7 @@ public class FlorController {
     //delete
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") int id){
-        if(!florService.findById(id).isPresent()) {
+        if(florService.findById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
