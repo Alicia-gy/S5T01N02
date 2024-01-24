@@ -22,17 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/flor")
 public class FlorController {
 
-    @Autowired
-    private FlorService florService;
+    private final FlorService florService;
+
+    public FlorController(FlorService florService) {
+        this.florService = florService;
+    }
 
 
-    //create new
     @PostMapping("/add")
     public ResponseEntity<?> create (@RequestBody FlorDTO florDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(florService.save(florDTO));
     }
 
-    //read by id
     @GetMapping("/getOne/{id}")
     public ResponseEntity<?> read(@PathVariable(value = "id") int id){
         Optional<FlorDTO> flor = florService.findById(id);
@@ -44,13 +45,11 @@ public class FlorController {
         return ResponseEntity.ok(flor);
     }
 
-    //read all
     @GetMapping("/getAll")
     public List<FlorDTO> readAll() {
         return florService.findAll();
     }
 
-    //update
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@RequestBody FlorDTO florDetails, @PathVariable(value = "id") int id) {
         Optional<FlorDTO> flor = florService.findById(id);
@@ -67,7 +66,6 @@ public class FlorController {
 
     }
 
-    //delete
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") int id){
         if(florService.findById(id).isEmpty()) {

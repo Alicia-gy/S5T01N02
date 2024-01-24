@@ -18,8 +18,11 @@ import java.util.stream.Collectors;
 public class FlorServiceImpl implements FlorService {
 
 
-    @Autowired
-    private FlorRepository florRepository;
+    private final FlorRepository florRepository;
+
+    public FlorServiceImpl(FlorRepository florRepository) {
+        this.florRepository = florRepository;
+    }
 
     @Autowired
     private ModelMapper modelMapper;
